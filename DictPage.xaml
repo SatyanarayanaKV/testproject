@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModels="clr-namespace:EducationalApp.ViewModel"
+             x:Class="EducationalApp.Views.DictPage">
+
+    <ContentPage.BindingContext>
+        <ViewModels:DictViewModel/>
+    </ContentPage.BindingContext>
+    <StackLayout Padding="10,10,10,10">
+
+        <Label Text="Dictonary" VerticalOptions="CenterAndExpand" HeightRequest="50" FontAttributes="Bold" BackgroundColor="Beige" XAlign="Center" YAlign="Center"/>
+
+        <ListView x:Name="ListDict" ItemsSource="{Binding DbDict}" BackgroundColor="CornflowerBlue" HasUnevenRows="true">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding UserID}" HorizontalOptions="CenterAndExpand" XAlign="Center" YAlign="Center" IsVisible="False"/>
+                            <Label Text="{Binding EnglishDB}" HorizontalOptions="CenterAndExpand" XAlign="Center" YAlign="Center"/>
+                            <Label Text="{Binding FrenchDB}" HorizontalOptions="CenterAndExpand" XAlign="Center" YAlign="Center"/>
+                            <Label Text="{Binding DutchDB}" HorizontalOptions="CenterAndExpand" XAlign="Center" YAlign="Center"/>
+                            <Button Text="Delete" Clicked="Button_Clicked" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout VerticalOptions="CenterAndExpand">
+
+            <Entry x:Name="tfEng"  Placeholder="Enter English" Text="{Binding EnglishWord}" 
+                                HeightRequest="40" HorizontalOptions="FillAndExpand"/>
+            <Entry x:Name="tfFre"  Placeholder="Enter French" Text="{Binding FrenchWord}" 
+                                HeightRequest="40" HorizontalOptions="FillAndExpand"/>
+            <Entry x:Name="tfDutch"  Placeholder="Enter Dutch" Text="{Binding DutchWord}" 
+                                HeightRequest="40" HorizontalOptions="FillAndExpand"/>
+
+            <Button Text="Add Dictionary"  VerticalOptions="CenterAndExpand" Command="{Binding AddDict}"/>
+
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

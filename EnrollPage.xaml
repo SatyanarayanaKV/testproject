@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:Converters="clr-namespace:EducationalApp.Converter"
+             xmlns:Behaviors="clr-namespace:EducationalApp.Behaviors"
+             x:Class="EducationalApp.Views.EnrollPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Converters:BooleanToObjectConverter x:Key="boolToStyleImage"
+                                              x:TypeArguments="Style">
+                <Converters:BooleanToObjectConverter.FalseObject>
+                    <Style TargetType="Image">
+                        <Setter Property="HeightRequest" Value="20" />
+                        <Setter Property="Source" Value="error.png" />
+                    </Style>
+                </Converters:BooleanToObjectConverter.FalseObject>
+
+                <Converters:BooleanToObjectConverter.TrueObject>
+                    <Style TargetType="Image">
+                        <Setter Property="HeightRequest" Value="20" />
+                        <Setter Property="Source" Value="success.png" />
+                    </Style>
+                </Converters:BooleanToObjectConverter.TrueObject>
+            </Converters:BooleanToObjectConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout BackgroundColor="LightBlue">
+
+            <!--BackGround image of entire view-->
+
+            <!--<Image 
+			AbsoluteLayout.LayoutFlags="All"
+			AbsoluteLayout.LayoutBounds="0, 0.5, 1, 1"
+			x:Name="CompanyImage" 
+			Aspect="Fill" 
+			Source="loginbg" />-->
+
+
+            <StackLayout 
+			AbsoluteLayout.LayoutFlags="WidthProportional, PositionProportional"
+			AbsoluteLayout.LayoutBounds="0, 0.5, 1, AutoSize"
+			Spacing="20" 
+			Padding="10">
+
+                <!--<StackLayout Padding="0,30,0,0" AbsoluteLayout.LayoutFlags="WidthProportional, PositionProportional"
+			AbsoluteLayout.LayoutBounds="0, 0, 1, AutoSize" >
+                    <Image HeightRequest="100" WidthRequest="100"  Source="logo" />
+                </StackLayout>-->
+                <!--Layout for Usename-->
+
+                <AbsoluteLayout
+		HeightRequest="50">
+
+                    <Image 
+			AbsoluteLayout.LayoutFlags="All"
+			AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+			 
+			Aspect="Fill" 
+			Source="loginpwdbox" />
+
+                    <StackLayout  Orientation="Horizontal" Padding="10" 
+                                 AbsoluteLayout.LayoutFlags="WidthProportional, PositionProportional"
+			AbsoluteLayout.LayoutBounds="0, 0.5, 1, AutoSize">
+
+                        <Image HeightRequest="20" WidthRequest="20" Source="usericon" />
+                        <Entry x:Name="tfUsername"  Placeholder="Enter Email" Text="{Binding Username}" 
+                               Keyboard="Email"  HeightRequest="40" HorizontalOptions="FillAndExpand">
+                            <Entry.Behaviors>
+                                <Behaviors:EmailValidatorBehavior x:Name="usernameValidator"/>
+
+                            </Entry.Behaviors>
+
+                        </Entry>
+                        <Image  x:Name="emailSuccessErrorImage"
+                  Style="{Binding Source={x:Reference usernameValidator}, 
+                                Path=IsValid, 
+                                Converter={StaticResource boolToStyleImage}}"/>
+                    </StackLayout>
+                </AbsoluteLayout>
+                <!--Layout for Password-->
+
+                <AbsoluteLayout
+		HeightRequest="50">
+
+                    <Image 
+			AbsoluteLayout.LayoutFlags="All"
+			AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+			 
+			Aspect="Fill" 
+			Source="loginpwdbox" />
+
+                    <StackLayout  Orientation="Horizontal" Padding="10" 
+                                 AbsoluteLayout.LayoutFlags="WidthProportional, PositionProportional"
+			AbsoluteLayout.LayoutBounds="0, 0.5, 1, AutoSize">
+
+                        <Image HeightRequest="20" WidthRequest="20" Source="passwordicon" />
+
+                        <Entry x:Name="tfPassword" Placeholder="Enter Password" Text="{Binding Password}" 
+                               IsPassword="True"  HeightRequest="40" HorizontalOptions="FillAndExpand">
+                            <Entry.Behaviors>
+                                <Behaviors:PasswordValidationBehavior x:Name="passwordValidator"/>
+
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Image  x:Name="passwordSuccessErrorImage"
+                  Style="{Binding Source={x:Reference passwordValidator}, 
+                                Path=IsValid, 
+                                Converter={StaticResource boolToStyleImage}}"/>
+                    </StackLayout>
+                </AbsoluteLayout>
+                <!--Layout for ConfirmPassword-->
+
+
+                <AbsoluteLayout
+		HeightRequest="50">
+
+                    <Image 
+			AbsoluteLayout.LayoutFlags="All"
+			AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+			 
+			Aspect="Fill" 
+			Source="loginpwdbox" />
+
+                    <StackLayout  Orientation="Horizontal" Padding="10" 
+                                 AbsoluteLayout.LayoutFlags="WidthProportional, PositionProportional"
+			AbsoluteLayout.LayoutBounds="0, 0.5, 1, AutoSize">
+
+                        <Image HeightRequest="20" WidthRequest="20" Source="passwordicon" />
+
+                        <Entry x:Name="tfConfirmPassword" Placeholder="Enter Confirm Password" Text="{Binding ConfirmPassword}" 
+                               IsPassword="True"  HeightRequest="40" HorizontalOptions="FillAndExpand">
+
+                            <Entry.Behaviors>
+                                <Behaviors:CompareValidationBehavior x:Name="ConfirmPasswordValidator"
+                                                    CompareToEntry="{Binding Source={x:Reference tfPassword}}" />
+                            </Entry.Behaviors>
+
+                        </Entry>
+                        <Image  x:Name="ConfirmPasswordSuccessErrorImage"
+                  Style="{Binding Source={x:Reference ConfirmPasswordValidator}, 
+                                Path=IsValid, 
+                                Converter={StaticResource boolToStyleImage}}"/>
+                    </StackLayout>
+                </AbsoluteLayout>
+
+
+                <!--Layout for Enroll-->
+
+
+                <AbsoluteLayout
+		HeightRequest="50">
+
+                    <Image 
+			AbsoluteLayout.LayoutFlags="All"
+			AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+			 
+			Aspect="Fill" 
+			Source="loginpwdbox" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding EnrollCommand} " />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <StackLayout  Orientation="Horizontal" Padding="10" 
+                                 AbsoluteLayout.LayoutFlags="WidthProportional, PositionProportional"
+			AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, AutoSize">
+
+                        <Label Text="Enroll" HorizontalOptions="CenterAndExpand" IsEnabled="{Binding IsPresentingLoginUI}"/>
+
+                    </StackLayout>
+                    <ActivityIndicator Color="Black"
+									x:Name="SignInButtonActivityIndicator" 
+									IsEnabled="{Binding IsPresentingLoginUI}" 
+									IsVisible="{Binding IsPresentingLoginUI}" 
+									IsRunning="{Binding IsPresentingLoginUI}" 
+									AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0" 
+									AbsoluteLayout.LayoutFlags="All" />
+
+                </AbsoluteLayout>
+
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
